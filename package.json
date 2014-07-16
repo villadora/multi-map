@@ -1,26 +1,33 @@
 {
-  "name": "example",
-  "version": "0.0.0",
-  "description": "",
+  "name": "multimap",
+  "version": "0.0.1",
+  "description": "multi-map which allow multi values for the same key",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "./node_modules/.bin/jshint *.js test/*.js",
+    "test": "npm run lint; node test/index.js" 
   },
-  "repository": "",
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/villadora/multimap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/villadora/multimap/issues"
+  },
+  "keywords": [
+    "keys",
+    "map",
+    "multiple"
+  ],
   "dependencies": {},
   "devDependencies": {
     "jshint": "~2.1.9",
-    "mocha": "~1.12.0",
-    "chai": "~1.7.2",
-    "async": "~0.2.9",
-    "gulp": "~3.6.2",
-    "gulp-jshint": "^1.5.5"
+    "chai": "~1.7.2"
   },
   "readmeFilename": "README.md",
   "author": {
-    "name": "wei.gao",
+    "name": "villa.gao",
     "email": "jky239@gmail.com"
   },
-  "license": "BSD"
+  "license": "MIT"
 }
