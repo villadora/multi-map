@@ -1,7 +1,9 @@
 "use strict";
 
 var assert = require('chai').assert;
+require('es6-shim');
 var Multimap = require('..');
+Multimap.Map = Map;
 
 var map = new Multimap([
   ['a', 'one'],
@@ -66,6 +68,7 @@ map.forEachEntry(function(entry, key) {
 assert.equal(cnt, 2);
 
 
+
 var keys = map.keys(); // ['a', 'b']
 assert.equal(keys.next().value, 'a');
 assert.equal(keys.next().value, 'b');
@@ -77,7 +80,6 @@ assert.equal(values.next().value, 'two');
 assert.equal(values.next().value, 1);
 assert.equal(values.next().value, 2);
 assert(values.next().done);
-
 
 map.clear();
 

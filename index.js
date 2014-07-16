@@ -5,8 +5,8 @@ module.exports = Multimap;
 function Multimap(iterable) {
   var self = this;
 
-  if (typeof Map != 'undefined') {
-    self._map = Map;
+  if (Multimap.Map) {
+    self._map = Multimap.Map;
   }
 
   self._ = self._map ? new self._map() : {};
@@ -91,7 +91,10 @@ Multimap.prototype.has = function(key, val) {
  * @return {Array} all the keys in the map
  */
 Multimap.prototype.keys = function() {
-  return this._map ? this._.keys() : Object.keys(this._);
+  if (this._map) 
+    return this._.keys();
+
+  return makeIterator(Object.keys(this._));
 };
 
 /**
@@ -103,7 +106,7 @@ Multimap.prototype.values = function() {
     Array.prototype.push.apply(vals, entry);
   });
 
-  return vals;
+  return makeIterator(vals);
 };
 
 /**
@@ -111,16 +114,19 @@ Multimap.prototype.values = function() {
  */
 Multimap.prototype.forEachEntry = function(iter) {
   var self = this;
-  self.keys().forEach(function(key) {
-    iter(self.get(key), key);
-  });
+
+  var keys = self.keys();
+  var next;
+  while(!(next = keys.next()).done) {
+    iter(self.get(next.value), next.value, self);
+  }
 };
 
 Multimap.prototype.forEach = function(iter) {
   var self = this;
   self.forEachEntry(function(entry, key) {
     entry.forEach(function(item) {
-      iter(item, key);
+      iter(item, key, self);
     });
   });
 };
@@ -141,8 +147,25 @@ Object.defineProperty(
     enumerable: true,
     get: function() {
       var self = this;
-      return self.keys().reduce(function(total, key) {
-        return total + self.get(key).length;
-      }, 0);
+      var keys = self.keys();
+      var next, total = 0;
+      while(!(next = keys.next()).done) {
+        total += self.get(next.value).length;
+      }
+      return total;
     }
   });
+
+
+
+function makeIterator(array){
+  var nextIndex = 0;
+  
+  return {
+    next: function(){
+      return nextIndex < array.length ?
+        {value: array[nextIndex++], done: false} :
+      {done: true};
+    }
+  }
+}

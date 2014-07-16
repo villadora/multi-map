@@ -1,11 +1,11 @@
 {
   "name": "multimap",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "multi-map which allow multi values for the same key",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/jshint *.js test/*.js",
-    "test": "npm run lint; node test/index.js" 
+    "test": "npm run lint; node test/index.js;node test/es6map.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +21,9 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "jshint": "~2.1.9",
-    "chai": "~1.7.2"
+    "chai": "~1.7.2",
+    "es6-shim": "^0.13.0",
+    "jshint": "~2.1.9"
   },
   "readmeFilename": "README.md",
   "author": {
