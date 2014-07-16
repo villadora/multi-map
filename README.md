@@ -82,8 +82,9 @@ map.forEachEntry(function (entry, key) {
 });
 
 
-var keys = map.keys();      // ['a', 'b']
-var values = map.values();  // ['one', 'two', 1, 2]
+var keys = map.keys();      // iterator with ['a', 'b']
+keys.next().value;          // 'a'
+var values = map.values();  // iterator ['one', 'two', 1, 2]
 
 map.clear();                // undefined
 map.size;                   // 0
