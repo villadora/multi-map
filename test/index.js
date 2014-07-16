@@ -1,17 +1,24 @@
+"use strict";
+
 var assert = require('chai').assert;
 var Multimap = require('..');
 
-var map = new Multimap([['a', 'one'], ['b', 1], ['a', 'two'], ['b', 2]]);
+var map = new Multimap([
+  ['a', 'one'],
+  ['b', 1],
+  ['a', 'two'],
+  ['b', 2]
+]);
 
 assert.equal(map.size, 4);
 
-assert.equal(map.get('a').length, 2);             
-assert.equal(map.get('a')[0], 'one');             // ['one', 'two']
-assert.equal(map.get('a')[1], 'two');             // ['one', 'two']
+assert.equal(map.get('a').length, 2);
+assert.equal(map.get('a')[0], 'one'); // ['one', 'two']
+assert.equal(map.get('a')[1], 'two'); // ['one', 'two']
 
 assert.equal(map.get('b').length, 2);
-assert.equal(map.get('b')[0], 1);             // [1, 2]
-assert.equal(map.get('b')[1], 2);             // [1, 2]
+assert.equal(map.get('b')[0], 1); // [1, 2]
+assert.equal(map.get('b')[1], 2); // [1, 2]
 
 
 assert(map.has('a'), "map contains key 'a'");
@@ -23,7 +30,7 @@ assert(!map.has('b', 3), "map does not contain entry 'b'=>3");
 map.set('a', 'three');
 
 assert.equal(map.size, 5);
-assert.equal(map.get('a').length, 3);             // ['one', 'two', 'three']
+assert.equal(map.get('a').length, 3); // ['one', 'two', 'three']
 
 map.set('b', 3, 4);
 assert.equal(map.size, 7);
@@ -37,10 +44,10 @@ assert(map.delete('b'), "delete all 'b'");
 assert.equal(map.size, 2);
 
 map.set('b', 1, 2);
-assert.equal(map.size, 4);                 // 4
+assert.equal(map.size, 4); // 4
 
 var cnt = 0;
-map.forEach(function (value, key) {
+map.forEach(function(value, key) {
   // iterates { 'a', 'one' }, { 'a', 'two' }, { 'b', 1 }, { 'b', 2 } 
   cnt++;
   assert(key == 'a' || key == 'b', "key must be either 'a' or 'b'");
@@ -49,25 +56,24 @@ map.forEach(function (value, key) {
 assert.equal(cnt, 4);
 
 cnt = 0;
-map.forEachEntry(function (entry, key) {
+map.forEachEntry(function(entry, key) {
   // iterates { 'a', ['one', 'two'] }, { 'b', [1, 2] } 
   cnt++;
   assert(key == 'a' || key == 'b', "key must be either 'a' or 'b'");
-  assert.equal(entry.length , 2);
+  assert.equal(entry.length, 2);
 });
 
 assert.equal(cnt, 2);
 
 
-var keys = map.keys();      // ['a', 'b']
+var keys = map.keys(); // ['a', 'b']
 assert.equal(keys.length, 2);
 assert.equal(keys[0], 'a');
 assert.equal(keys[1], 'b');
 
-var values = map.values();  // ['one', 'two', 1, 2]
+var values = map.values(); // ['one', 'two', 1, 2]
 assert.equal(values.length, 4);
 
 map.clear();
 
 assert.equal(map.size, 0);
-

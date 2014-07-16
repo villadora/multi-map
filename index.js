@@ -5,13 +5,13 @@ module.exports = Multimap;
 function Multimap(iterable) {
   var self = this;
 
-  if(typeof Map != 'undefined') {
+  if (typeof Map != 'undefined') {
     self._map = Map;
   }
-  
+
   self._ = self._map ? new self._map() : {};
 
-  if(iterable) {
+  if (iterable) {
     iterable.forEach(function(i) {
       self.set(i[0], i[1]);
     });
@@ -36,9 +36,9 @@ Multimap.prototype.set = function(key, val) {
   key = args.shift();
 
   var entry = this.get(key);
-  if(!entry) {
+  if (!entry) {
     entry = [];
-    if(this._map)
+    if (this._map)
       this._.set(key, entry);
     else
       this._[key] = entry;
@@ -54,16 +54,16 @@ Multimap.prototype.set = function(key, val) {
  * @return {boolean} true if any thing changed
  */
 Multimap.prototype.delete = function(key, val) {
-  if(!this.has(key))
+  if (!this.has(key))
     return false;
 
-  if(arguments.length == 1) {
+  if (arguments.length == 1) {
     this._map ? (this._.delete(key)) : (delete this._[key]);
     return true;
-  }else {
+  } else {
     var entry = this.get(key);
     var idx = entry.indexOf(val);
-    if(idx != -1){
+    if (idx != -1) {
       entry.splice(idx, 1);
       return true;
     }
@@ -78,9 +78,9 @@ Multimap.prototype.delete = function(key, val) {
  * @return {boolean} whether the map contains 'key' or 'key=>val' pair
  */
 Multimap.prototype.has = function(key, val) {
-  var hasKey =  this._map ? this._.has(key) : this._.hasOwnProperty(key);
+  var hasKey = this._map ? this._.has(key) : this._.hasOwnProperty(key);
 
-  if(arguments.length == 1 || !hasKey)
+  if (arguments.length == 1 || !hasKey)
     return hasKey;
 
   var entry = this.get(key) || [];
@@ -116,7 +116,7 @@ Multimap.prototype.forEachEntry = function(iter) {
   });
 };
 
-Multimap.prototype.forEach = function(iter){
+Multimap.prototype.forEach = function(iter) {
   var self = this;
   self.forEachEntry(function(entry, key) {
     entry.forEach(function(item) {
@@ -127,15 +127,15 @@ Multimap.prototype.forEach = function(iter){
 
 
 Multimap.prototype.clear = function() {
-  if(this._map) {
+  if (this._map) {
     this._.clear();
-  }else {
+  } else {
     this._ = {};
   }
 };
 
 Object.defineProperty(
-  Multimap.prototype, 
+  Multimap.prototype,
   "size", {
     configurable: false,
     enumerable: true,
@@ -146,5 +146,3 @@ Object.defineProperty(
       }, 0);
     }
   });
-
-
