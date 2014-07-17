@@ -1,5 +1,6 @@
 # Multimap - Map which Allow Multiple Values for the same Key
 
+[![NPM version](https://badge.fury.io/js/multi-map.svg)](http://badge.fury.io/js/multi-map)
 [![Build Status](https://travis-ci.org/villadora/multi-map.png?branch=master)](https://travis-ci.org/villadora/multi-map)
 
 ## Install
