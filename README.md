@@ -1,5 +1,7 @@
 # Multimap - Map which Allow Multiple Values for the same Key
 
+[![Build Status](https://travis-ci.org/villadora/multi-map.png?branch=master)](https://travis-ci.org/villadora/multi-map)
+
 ## Install
 
 ```bash
