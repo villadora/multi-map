@@ -1,6 +1,6 @@
 {
   "name": "multimap",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "multi-map which allow multiple values for the same key",
   "main": "index.js",
   "scripts": {
