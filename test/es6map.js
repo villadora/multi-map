@@ -2,8 +2,8 @@
 
 var assert = require('chai').assert;
 require('es6-shim');
+
 var Multimap = require('..');
-Multimap.Map = Map;
 
 var map = new Multimap([
   ['a', 'one'],

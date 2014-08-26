@@ -19,14 +19,13 @@ var Multimap = require('multimap');
 var m = new Multimap();
 ```
 
-If `Multimap.Map` is set, `Multimap` will use the `Map` as inner store, that means Object can be used as key. 
+If the global es6 `Map` exists or `Multimap.Map` is set, `Multimap` will use the `Map` as inner store, that means Object can be used as key. 
 
 ```javascript
 var Multimap = require('multimap');
 
 // if harmony is on
-Multimap.Map = Map;
-
+/* nothing need to do */
 // or if you are using es6-shim
 Multimap.Map = ShimMap;
 
@@ -38,7 +37,32 @@ m.set(key, 'one');
 
 Otherwise, an object will be used, all the keys will be transformed into string.
 
-#### API
+
+### Browser
+
+Just download the `index.js` as `Multimap.js`.
+
+```
+<script src=Multimap.js"></script>
+<script>
+var map = new Multimap([['a', 1], ['b', 2], ['c', 3]]);
+map = map.set('b', 20);
+map.get('b'); // [2, 20]
+</script>
+```
+
+Or use as an AMD loader:
+
+```
+require(['./Multimap.js'], function (Multimap) {
+  var map = new Multimap([['a', 1], ['b', 2], ['c', 3]]);
+  map = map.set('b', 20);
+  map.get('b'); // [2, 20]
+});
+```
+
+
+## API
 
 Following shows how to use `Multimap`:
 
