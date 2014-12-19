@@ -38,7 +38,7 @@ m.set(key, 'one');
 Otherwise, an object will be used, all the keys will be transformed into string.
 
 
-### Browser
+### In Modern Browser
 
 Just download the `index.js` as `Multimap.js`.
 
@@ -60,6 +60,8 @@ require(['./Multimap.js'], function (Multimap) {
   map.get('b'); // [2, 20]
 });
 ```
+
+* Browsers should support `Object.defineProperty` and `Array.prototype.forEach`.
 
 
 ## API
@@ -101,11 +103,11 @@ map.size;                 // 4
 
 
 map.forEach(function (value, key) {
-  // iterates { 'a', 'one' }, { 'a', 'two' }, { 'b', 1 }, { 'b', 2 } 
+  // iterates { 'one', 'a' }, { 'two', 'a' }, { 1, b }, { 2, 'b' } 
 });
 
 map.forEachEntry(function (entry, key) {
-  // iterates { 'a', ['one', 'two'] }, { 'b', [1, 2] } 
+  // iterates {['one', 'two'], 'a' }, {[1, 2], 'b' } 
 });
 
 
@@ -116,6 +118,8 @@ var values = map.values();  // iterator ['one', 'two', 1, 2]
 map.clear();                // undefined
 map.size;                   // 0
 ```
+
+
 
 
 ## License
