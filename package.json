@@ -1,7 +1,7 @@
 {
   "name": "multimap",
   "version": "0.0.2",
-  "description": "multi-map which allow multi values for the same key",
+  "description": "multi-map which allow multiple values for the same key",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/jshint *.js test/*.js",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/villadora/multimap.git"
+    "url": "git://github.com/villadora/multi-map.git"
   },
   "bugs": {
-    "url": "https://github.com/villadora/multimap/issues"
+    "url": "https://github.com/villadora/multi-map/issues"
   },
   "keywords": [
     "keys",
