@@ -4,16 +4,18 @@
 
 var mapEach;
 
+function mapKeysNext(map, operation){
+  var keys = map.keys();
+  var next;
+  while(!(next = keys.next()).done) {
+    operation(map.get(next.value), next.value, map);
+  }
+}
+
 try{
-  mapEach = new Function('return function(map, operation){map && for(var key of map.keys()){operation(map.get(key), key, map)}}')();
+  mapEach = new Function('return function(map, operation){var keys = map.keys(); if(keys.next){return mapKeysNext.apply(this, argument);} for(var key of keys){operation(map.get(key), key, map) } };', 'mapKeysNext')(mapKeysNext);
 }catch(error){
-  mapEach = function(map, operation){
-    var keys = map.keys();
-    var next;
-    while(!(next = keys.next()).done) {
-      operation(map.get(next.value), next.value, map);
-    }
-  };
+  mapEach = mapKeysNext;
 }
 
 var Multimap = (function() {
