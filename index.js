@@ -13,7 +13,7 @@ function mapKeysNext(map, operation){
 }
 
 try{
-  mapEach = new Function('return function(map, operation){var keys = map.keys(); if(keys.next){return mapKeysNext.apply(this, argument);} for(var key of keys){operation(map.get(key), key, map) } };', 'mapKeysNext')(mapKeysNext);
+  mapEach = new Function('mapKeysNext', 'return function(map, operation){var keys = map.keys(); if(keys.next){return mapKeysNext.apply(this, arguments);} for(var key of keys){operation(map.get(key), key, map) } };')(mapKeysNext);
 }catch(error){
   mapEach = mapKeysNext;
 }
