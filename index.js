@@ -167,7 +167,7 @@ var Multimap = (function() {
       }
     });
 
-  var safariNext = new Function('return function(){var keys = this.keys(); for(var key of keys){return key} };')();
+  var safariNext = new Function('iterator', 'makeIterator', 'var keysArray = []; for(var key of iterator){keysArray.push(key);} return makeIterator(keysArray);');
 
   function makeIterator(iterator){
     if(Array.isArray(iterator)){
@@ -184,7 +184,7 @@ var Multimap = (function() {
 
     // Only an issue in safari
     if(!iterator.next){
-      iterator.next = safariNext;
+      iterator.next = safariNext(iterator, makeIterator);
     }
 
     return iterator;
