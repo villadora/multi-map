@@ -2,20 +2,12 @@
 
 /* global module, define */
 
-var mapEach;
-
-function mapKeysNext(map, operation){
+function mapEach(map, operation){
   var keys = map.keys();
   var next;
   while(!(next = keys.next()).done) {
     operation(map.get(next.value), next.value, map);
   }
-}
-
-try{
-  mapEach = new Function('mapKeysNext', 'return function(map, operation){var keys = map.keys(); if(keys.next){return mapKeysNext.apply(this, arguments);} for(var key of keys){operation(map.get(key), key, map) } };')(mapKeysNext);
-}catch(error){
-  mapEach = mapKeysNext;
 }
 
 var Multimap = (function() {
@@ -111,12 +103,13 @@ var Multimap = (function() {
     return entry.indexOf(val) != -1;
   };
 
+
   /**
    * @return {Array} all the keys in the map
    */
   Multimap.prototype.keys = function() {
     if (this._map)
-      return this._.keys();
+      return makeIterator(this._.keys());
 
     return makeIterator(Object.keys(this._));
   };
@@ -174,17 +167,27 @@ var Multimap = (function() {
       }
     });
 
+  var safariNext = new Function('return function(){var keys = this.keys(); for(var key of keys){return key} };')();
 
-  function makeIterator(array){
-    var nextIndex = 0;
+  function makeIterator(iterator){
+    if(Array.isArray(iterator)){
+      var nextIndex = 0;
 
-    return {
-      next: function(){
-        return nextIndex < array.length ?
-          {value: array[nextIndex++], done: false} :
-        {done: true};
-      }
-    };
+      return {
+        next: function(){
+          return nextIndex < iterator.length ?
+            {value: iterator[nextIndex++], done: false} :
+          {done: true};
+        }
+      };
+    }
+
+    // Only an issue in safari
+    if(!iterator.next){
+      iterator.next = safariNext;
+    }
+
+    return iterator;
   }
 
   return Multimap;
