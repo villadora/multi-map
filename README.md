@@ -3,6 +3,11 @@
 [![NPM version](https://badge.fury.io/js/multimap.svg)](http://badge.fury.io/js/multimap)
 [![Build Status](https://travis-ci.org/villadora/multi-map.png?branch=master)](https://travis-ci.org/villadora/multi-map)
 
+
+## Note
+
+This year as work content changed, I have no spare time to maintaining the node modules, if anyone want to take and keep maintaining, just contact me via jky239@gmail.com with Title contains: "Wanted: npm package xxxx". Thx.
+
 ## Install
 
 ```bash
