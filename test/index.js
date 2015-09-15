@@ -48,7 +48,7 @@ assert.equal(map.size, 4); // 4
 
 var cnt = 0;
 map.forEach(function(value, key) {
-  // iterates { 'a', 'one' }, { 'a', 'two' }, { 'b', 1 }, { 'b', 2 } 
+  // iterates { 'a', 'one' }, { 'a', 'two' }, { 'b', 1 }, { 'b', 2 }
   cnt++;
   assert(key == 'a' || key == 'b', "key must be either 'a' or 'b'");
 });
@@ -57,7 +57,7 @@ assert.equal(cnt, 4);
 
 cnt = 0;
 map.forEachEntry(function(entry, key) {
-  // iterates { 'a', ['one', 'two'] }, { 'b', [1, 2] } 
+  // iterates { 'a', ['one', 'two'] }, { 'b', [1, 2] }
   cnt++;
   assert(key == 'a' || key == 'b', "key must be either 'a' or 'b'");
   assert.equal(entry.length, 2);
