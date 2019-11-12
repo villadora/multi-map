@@ -177,6 +177,16 @@ var Multimap = (function() {
       }
     });
 
+  Object.defineProperty(
+    Multimap.prototype,
+    "count", {
+      configurable: false,
+      enumerable: true,
+      get: function() {
+        return this._.size;
+      }
+    });
+
   var safariNext;
 
   try{

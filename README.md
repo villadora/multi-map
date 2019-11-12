@@ -19,7 +19,7 @@ var Multimap = require('multimap');
 var m = new Multimap();
 ```
 
-If the global es6 `Map` exists or `Multimap.Map` is set, `Multimap` will use the `Map` as inner store, that means Object can be used as key. 
+If the global es6 `Map` exists or `Multimap.Map` is set, `Multimap` will use the `Map` as inner store, that means Object can be used as key.
 
 ```javascript
 var Multimap = require('multimap');
@@ -74,6 +74,7 @@ var Multimap = require('multimap');
 var map = new Multimap([['a', 'one'], ['b', 1], ['a', 'two'], ['b', 2]]);
 
 map.size;                 // 4
+map.count;                // 2
 
 map.get('a');             // ['one', 'two']
 map.get('b');             // [1, 2]
@@ -86,10 +87,12 @@ map.has('b', 3);          // false
 
 map.set('a', 'three');
 map.size;                 // 5
+map.count;                // 2
 map.get('a');             // ['one', 'two', 'three']
 
 map.set('b', 3, 4);
 map.size;                 // 7
+map.count;                // 2
 
 map.delete('a', 'three'); // true
 map.delete('x');          // false
@@ -97,17 +100,19 @@ map.delete('a', 'four');  // false
 map.delete('b');          // true
 
 map.size;                 // 2
+map.count;                // 1
 
 map.set('b', 1, 2);
 map.size;                 // 4
+map.count;                // 2
 
 
 map.forEach(function (value, key) {
-  // iterates { 'one', 'a' }, { 'two', 'a' }, { 1, b }, { 2, 'b' } 
+  // iterates { 'one', 'a' }, { 'two', 'a' }, { 1, b }, { 2, 'b' }
 });
 
 map.forEachEntry(function (entry, key) {
-  // iterates {['one', 'two'], 'a' }, {[1, 2], 'b' } 
+  // iterates {['one', 'two'], 'a' }, {[1, 2], 'b' }
 });
 
 
@@ -117,6 +122,7 @@ var values = map.values();  // iterator ['one', 'two', 1, 2]
 
 map.clear();                // undefined
 map.size;                   // 0
+map.count;                  // 0
 ```
 
 
