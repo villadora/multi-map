@@ -11,6 +11,7 @@ var map = new Multimap([
 ]);
 
 assert.equal(map.size, 4);
+assert.equal(map.count, 2);
 
 assert.equal(map.get('a').length, 2);
 assert.equal(map.get('a')[0], 'one'); // ['one', 'two']
@@ -30,21 +31,26 @@ assert(!map.has('b', 3), "map does not contain entry 'b'=>3");
 map.set('a', 'three');
 
 assert.equal(map.size, 5);
+assert.equal(map.count, 2);
 assert.equal(map.get('a').length, 3); // ['one', 'two', 'three']
 
 map.set('b', 3, 4);
 assert.equal(map.size, 7);
+assert.equal(map.count, 2);
 
 assert(map.delete('a', 'three'), "delete 'a'=>'three'");
 assert.equal(map.size, 6);
+assert.equal(map.count, 2);
 assert(!map.delete('x'), "empty 'x' for delete");
 assert(!map.delete('a', 'four'), "no such entry 'a'=>'four'");
 assert(map.delete('b'), "delete all 'b'");
 
 assert.equal(map.size, 2);
+assert.equal(map.count, 1);
 
 map.set('b', 1, 2);
 assert.equal(map.size, 4); // 4
+assert.equal(map.count, 2);
 
 var cnt = 0;
 map.forEach(function(value, key) {
@@ -82,3 +88,4 @@ assert(values.next().done);
 map.clear();
 
 assert.equal(map.size, 0);
+assert.equal(map.count, 0);
