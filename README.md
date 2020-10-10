@@ -126,6 +126,9 @@ map.count;                  // 0
 ```
 
 
+## Related
+
+- [many-keys-map](https://github.com/fregante/many-keys-map) - A `Map` subclass with support for multiple keys for one entry, the opposite of this module.
 
 
 ## License
