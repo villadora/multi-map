@@ -200,6 +200,9 @@ var Multimap = (function() {
       var nextIndex = 0;
 
       return {
+        [Symbol.iterator](){
+          return this
+        },
         next: function(){
           return nextIndex < iterator.length ?
             {value: iterator[nextIndex++], done: false} :
